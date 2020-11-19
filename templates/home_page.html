@@ -1,0 +1,26 @@
+{% extends 'html_base_page.html' %}
+
+{% block content %}
+
+    <h1>Welcome to Healthy World!</h1>
+    <h2>The ultimate place to keep track of your health.</h2><br><br>
+    <div class="container">
+        <div class="my-form-container">
+            <form action='login' method='POST'>
+                {% csrf_token %}
+                Username:
+                <div class="form-group">
+                    <input type='text' class="form-control" name='user_name' placeholder="Enter Username" required>
+                </div>
+                Password:
+                <div class="form-group"> 
+                    <input type="password" class="form-control" name="pass" placeholder="Enter Password" required>
+                </div>
+                <input class="btn btn-primary" placeholder="Log In" type="submit">
+            </form>
+        </div>
+    </div>
+    Don't have an account? 
+    <a href="register">Sign Up</a>
+
+{% endblock %}
