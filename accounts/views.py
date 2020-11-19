@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
@@ -6,11 +7,31 @@ def home_page(request):
     return render(request, 'home_page.html')
 
 def login(request):
-    pass
+    username = request.POST['user_name']
+    password = request.POST['pass']
+
+    user = auth.authenticate(username = username, password = password)
+    if user:
+        auth.login(request, user)
+        return redirect('../profile')
+    else:
+        pass # pass message
 
 def register(request):
     if request.method == 'POST':
-        pass
+
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        user_name = request.POST["user_name"]
+        email = request.POST["email"]
+        pass1 = request.POST["pass1"]
+        pass2 = request.POST["pass2"]
+
+        user = User.objects.create_user(username = user_name, email = email, password = pass1
+                ,first_name = first_name, last_name = last_name)
+        user.save()
+        return redirect('/')
+        
     else:
         return render(request, 'register.html')
 
