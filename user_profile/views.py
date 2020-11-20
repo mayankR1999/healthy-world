@@ -23,6 +23,7 @@ def add_goal(request):
     new_goal.description = goal_text
     new_goal.date_created = datetime.date(y1, m1, d1)
     new_goal.last_date = datetime.date(y2, m2, d2)
+    new_goal.user = request.user
 
     new_goal.save()
 

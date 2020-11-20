@@ -17,23 +17,97 @@
     </ul>
     <form action="add_goal" method="POST">
         {% csrf_token %}
-            <div class="form-group">
-                <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
-            </div>
-            <label for="last_date">Target:</label>
-            <input type="date" id="last_date" name="target_date" required>
-            <input class="btn btn-primary" value="Add" type="submit">
+        <div class="form-group">
+            <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
+        </div>
+        <label for="last_date">Target:</label>
+        <input type="date" id="last_date" name="target_date" required>
+        <input class="btn btn-primary" value="Add" type="submit">
     </form>
 </div>
 
 <div class="info-block">
     <h2>User Info</h2>
-    <ul>
-        <li>Height</li>
-        <li>Weight</li>
-        <li>Age</li>
-        <li>BMI</li>
-    </ul>
-    <a href="update_user_info">Update Profile Info</a>
+
+    <!-- make collapse for each attribute having option to update that particular item -->
+
+    <div id="accordian">
+        <div class="card">
+
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapse_height">
+                    <b>Height</b>
+                </a>
+            </div>
+            <div id="collapse_height" class="collapse" data-parent="#accordian">
+                <div class="card-body">
+                    <form action="update_height" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type='text' class="form-control" name='height' placeholder="Height(cm)" required>
+                        </div>
+                        <input class="btn btn-primary" value="Update" type="submit">
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapse_weight">
+                    <b>Weight</b>
+                </a>
+            </div>
+            <div id="collapse_weight" class="collapse" data-parent="#accordian">
+                <div class="card-body">
+                    <form action="update_Weight" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type='text' class="form-control" name='weight' placeholder="Weight(kg)" required>
+                        </div>
+                        <input class="btn btn-primary" value="Update" type="submit">
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapse_gender">
+                    <b>Gender</b>
+                </a>
+            </div>
+            <div id="collapse_gender" class="collapse" data-parent="#accordian">
+                <div class="card-body">
+                    <form action="update_gender">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="male" name="gender">
+                            <label class="custom-control-label" for="male">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="female" name="gender">
+                            <label class="custom-control-label" for="female">Female</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="other" name="gender">
+                            <label class="custom-control-label" for="other">Other</label>
+                        </div>
+                        <input class="btn btn-primary" value="Update" type="submit">
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapse_birthday">
+                    <b>Birthday</b>
+                </a>
+            </div>
+            <div id="collapse_birthday" class="collapse" data-parent="#accordian">
+                <div class="card-body">
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="birthday" name="bday" required>
+                    <input class="btn btn-primary" value="Update" type="submit">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 {% endblock %}
