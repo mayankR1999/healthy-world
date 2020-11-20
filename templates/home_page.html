@@ -2,25 +2,23 @@
 
 {% block content %}
 
+<div class="container mycontainer">
     <h1>Welcome to Healthy World!</h1>
-    <h2>The ultimate place to keep track of your health.</h2><br><br>
-    <div class="container">
-        <div class="my-form-container">
+    <h2>The ultimate place to keep track of your health.</h2>
+        <div class="my-login-form-container">
             <form action='login' method='POST'>
                 {% csrf_token %}
-                Username:
                 <div class="form-group">
-                    <input type='text' class="form-control" name='user_name' placeholder="Enter Username" required>
+                    <input type='text' class="form-control" name='user_name' placeholder="Username" required>
                 </div>
-                Password:
                 <div class="form-group"> 
-                    <input type="password" class="form-control" name="pass" placeholder="Enter Password" required>
+                    <input type="password" class="form-control" name="pass" placeholder="Password" required>
                 </div>
-                <input class="btn btn-primary" placeholder="Log In" type="submit">
+                <input class="btn btn-primary" value="Log In" type="submit">
             </form>
         </div>
-    </div>
     Don't have an account? 
     <a href="register">Sign Up</a>
+</div>
 
 {% endblock %}
