@@ -1,5 +1,39 @@
 {% extends "html_base_page.html" %}
 
 {% block content %}
-profile home
+<div>
+    <h1>User Profile</h1>
+</div>
+
+<div class="goals-block">
+    <h2>Goals:</h2>
+    <ul>
+        <li>laurem ipsem dhimkana faltu item.</li>
+        <li>laurem ipsem dhimkana faltu item.</li>
+        <li>laurem ipsem dhimkana faltu item.</li>
+        <li>laurem ipsem dhimkana faltu item.</li>
+        <li>laurem ipsem dhimkana faltu item.</li>
+        <li>laurem ipsem dhimkana faltu item.</li>
+    </ul>
+    <form action="add_goal" method="POST">
+        {% csrf_token %}
+            <div class="form-group">
+                <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
+            </div>
+            <label for="last_date">Target:</label>
+            <input type="date" id="last_date" name="target_date" required>
+            <input class="btn btn-primary" value="Add" type="submit">
+    </form>
+</div>
+
+<div class="info-block">
+    <h2>User Info</h2>
+    <ul>
+        <li>Height</li>
+        <li>Weight</li>
+        <li>Age</li>
+        <li>BMI</li>
+    </ul>
+    <a href="update_user_info">Update Profile Info</a>
+</div>
 {% endblock %}
