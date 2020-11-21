@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -7,7 +8,7 @@ class UserData(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key = True)
     height = models.FloatField(null=True)
     weight = models.FloatField(null=True)
-    DOB = models.DateField()
+    DOB = models.DateField(default = datetime.date(2000, 1, 1))
     age = models.IntegerField(null=True)
     gender = models.CharField(max_length = 6, null=True)
     reward = models.CharField(max_length = 25, default = 'NOVICE')

@@ -58,7 +58,7 @@
             </div>
             <div id="collapse_weight" class="collapse" data-parent="#accordian">
                 <div class="card-body">
-                    <form action="update_Weight" method="POST">
+                    <form action="update_weight" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <input type='text' class="form-control" name='weight' placeholder="Weight(kg)" required>
@@ -75,18 +75,18 @@
             </div>
             <div id="collapse_gender" class="collapse" data-parent="#accordian">
                 <div class="card-body">
-                    <form action="update_gender">
+                    <form action="update_gender" method="POST">
                         {% csrf_token %}
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="male" name="gender">
+                            <input type="radio" class="custom-control-input" id="male" value="Male" name="gender"/>
                             <label class="custom-control-label" for="male">Male</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="female" name="gender">
+                            <input type="radio" class="custom-control-input" id="female" value="Female" name="gender"/>
                             <label class="custom-control-label" for="female">Female</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="other" name="gender">
+                            <input type="radio" class="custom-control-input" id="other" value="Other" name="gender"/>
                             <label class="custom-control-label" for="other">Other</label>
                         </div>
                         <input class="btn btn-primary" value="Update" type="submit">
@@ -101,7 +101,7 @@
             </div>
             <div id="collapse_birthday" class="collapse" data-parent="#accordian">
                 <div class="card-body">
-                    <form action="update_birthday">
+                    <form action="update_birthday" method="POST">
                         {% csrf_token %}
                         <label for="birthday">Birthday:</label>
                         <input type="date" id="birthday" name="bday" required>
