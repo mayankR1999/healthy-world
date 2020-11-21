@@ -8,12 +8,9 @@
 <div class="goals-block">
     <h2>Goals:</h2>
     <ul>
-        <li>laurem ipsem dhimkana faltu item.</li>
-        <li>laurem ipsem dhimkana faltu item.</li>
-        <li>laurem ipsem dhimkana faltu item.</li>
-        <li>laurem ipsem dhimkana faltu item.</li>
-        <li>laurem ipsem dhimkana faltu item.</li>
-        <li>laurem ipsem dhimkana faltu item.</li>
+        {% for goal in user_goals %}
+            <li>{{ goal.description }}</li>
+        {% endfor %}
     </ul>
     <form action="add_goal" method="POST">
         {% csrf_token %}

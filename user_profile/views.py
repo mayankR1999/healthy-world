@@ -7,7 +7,14 @@ import datetime
 # Create your views here.
 
 def profile_home(request):
-    return render(request, 'profile_home.html')
+    user = request.user
+    user_goals = Goals.objects.filter(user = user)
+    user_info = UserData.objects.get(pk = user)
+    data = {
+        'user_goals' : user_goals,
+        'user_info' : user_info
+    }
+    return render(request, 'profile_home.html', data)
 
 def add_goal(request):
     goal_text = request.POST['goal']
@@ -31,7 +38,7 @@ def update_height(request):
     height = request.POST['height']
     user_info = UserData.objects.get(pk = request.user)
     user_info.height = height
-    #user_info.save()
+    user_info.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
 
@@ -40,7 +47,7 @@ def update_weight(request):
 
     user_info = UserData.objects.get(pk = request.user)
     user_info.weight = weight
-    #user_info.save()
+    user_info.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
 
@@ -48,7 +55,7 @@ def update_gender(request):
     gender = request.POST['gender']
     user_info = UserData.objects.get(pk = request.user)
     user_info.gender = gender
-    #user_info.save()
+    user_info.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
 
@@ -56,6 +63,6 @@ def update_birthday(request):
     DOB = request.POST['bday']
     user_info = UserData.objects.get(pk = request.user)
     user_info.DOB = DOB
-    #user_info.save()
+    user_info.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
