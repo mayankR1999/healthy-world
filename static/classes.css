@@ -25,17 +25,27 @@
 
 .goals-block{
     float: left;
-    width: 55%;
+    width: 50%;
     height: auto;
+    margin-left: 40px;
 }
 
 .info-block{
     float: right;
-    width: 35%;
+    width: 45%;
     height: auto;
     border-right: 0px;
     border-top: 0px;
     border-bottom: 0px;
     border-style: solid;
-    padding-left: 50px;
+    padding: 0% 6%;
+}
+
+.my-user-intro{
+    margin: 20px;
+    width: fit-content;
+}
+
+.add-goal{
+    width: fit-content;
 }
