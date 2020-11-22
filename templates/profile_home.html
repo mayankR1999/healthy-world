@@ -17,7 +17,7 @@
         <div class="form-group">
             <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
         </div>
-        <label for="last_date">Target:</label>
+        <label for="last_date">Due Date:</label>
         <input type="date" id="last_date" name="target_date" required>
         <input class="btn btn-primary" value="Add" type="submit">
     </form>
@@ -33,7 +33,10 @@
 
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapse_height">
-                    <b>Height</b>
+                    <b>Height</b><br>
+                    {% if user_info.height != null %}
+                        {{ user_info.height }} cm
+                    {% endif %}
                 </a>
             </div>
             <div id="collapse_height" class="collapse" data-parent="#accordian">
@@ -50,7 +53,10 @@
 
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapse_weight">
-                    <b>Weight</b>
+                    <b>Weight</b><br>
+                    {% if user_info.weight != null %}
+                        {{ user_info.weight }} kg
+                    {% endif %}
                 </a>
             </div>
             <div id="collapse_weight" class="collapse" data-parent="#accordian">
@@ -67,7 +73,10 @@
 
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapse_gender">
-                    <b>Gender</b>
+                    <b>Gender</b><br>
+                    {% if user_info.gender != null %}
+                        {{ user_info.gender }}
+                    {% endif %}
                 </a>
             </div>
             <div id="collapse_gender" class="collapse" data-parent="#accordian">
@@ -93,7 +102,8 @@
 
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapse_birthday">
-                    <b>Birthday</b>
+                    <b>Birthday</b><br>
+                    {{ user_info.DOB }}
                 </a>
             </div>
             <div id="collapse_birthday" class="collapse" data-parent="#accordian">
