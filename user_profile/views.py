@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Goals, UserData
 import datetime
+from .features import check_achievements
 
 # Create your views here.
 
@@ -66,3 +67,13 @@ def update_birthday(request):
     user_info.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
+
+def show_achievements(request):
+    achievements = check_achievements(request)
+    data = {
+        'achievements': achievements
+    }
+    return render(request, 'user_achievements.html', data)
+
+def goal_completed(request):
+    pass

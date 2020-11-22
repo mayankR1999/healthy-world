@@ -6,13 +6,20 @@
     <h3 style = "color: rgb(137, 137, 139);">{{ user_info.reward }}</h3>
 </div>
 
+<div id="corner-option"><a href="achievements">My Achievements</a></div>
+
 <div class="goals-block">
     <h2>Goals:</h2>
-    <ul>
-        {% for goal in user_goals %}
-            <li>{{ goal.description }}</li>
-        {% endfor %}
-    </ul>
+    {% for goal in user_goals %}
+        <div class='each-goal-block'>
+            {{ goal.description }}
+            <a href="{% url 'goal_completed' goal.id %}">
+                <div style="float: right;">
+                    <i class="fa fa-check"></i>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
     <div class="add-goal">
         <form action="add_goal" method="POST">
             {% csrf_token %}

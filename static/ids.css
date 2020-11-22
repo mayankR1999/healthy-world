@@ -1,0 +1,19 @@
+#corner-option{
+    margin-left: 40px;
+}
+
+#achievement-design{
+    border-style: ridge;
+    border-radius: 20px;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    float: left;
+    margin: 10px;
+    padding: 1px 4px;
+}
+
+#achievement-id{
+    background-color: beige;
+    margin: 75px;
+}

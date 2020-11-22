@@ -22,6 +22,6 @@ class Goals(models.Model):
     date_created = models.DateField()
     last_date = models.DateField()
 
-# class Achievements(models.Model):
+# class Achievements(models.Model): 
 
 # class Settings(models.Model):
