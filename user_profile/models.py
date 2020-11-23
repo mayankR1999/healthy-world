@@ -22,6 +22,10 @@ class Goals(models.Model):
     date_created = models.DateField()
     last_date = models.DateField()
 
+class IsGoalActive(models.Model):
+    goal = models.OneToOneField(Goals, primary_key = True, on_delete = models.CASCADE)
+    value = models.BooleanField(default = True)
+
 # class Achievements(models.Model): 
 
 # class Settings(models.Model):

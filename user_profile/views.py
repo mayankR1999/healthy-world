@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Goals, UserData
+from .models import Goals, UserData, IsGoalActive
 import datetime
-from .features import check_achievements
+from .features import check_achievements, is_on_time
 
 # Create your views here.
 
@@ -11,6 +11,12 @@ def profile_home(request):
     user = request.user
     user_goals = Goals.objects.filter(user = user)
     user_info = UserData.objects.get(pk = user)
+
+    # new learning(can make new object values in django)
+    for goal in user_goals:
+        is_active = IsGoalActive.objects.get(pk = goal)
+        goal.is_active = is_active.value
+
     data = {
         'user_goals' : user_goals,
         'user_info' : user_info
@@ -30,10 +36,34 @@ def add_goal(request):
     new_goal.last_date = last_date
     new_goal.user = request.user
 
+    is_active = IsGoalActive()
+    is_active.goal = new_goal
+
     new_goal.save()
+    is_active.save()
 
     return HttpResponseRedirect(reverse('profile_home'))
 
+def goal_completed(request, id):
+    goal = Goals.objects.get(id = id)
+    user_info = UserData.objects.get(pk = request.user)
+    is_goal_active = IsGoalActive.objects.get(pk = goal)
+    
+    if is_on_time(goal.last_date):
+        user_info.tasks_completed += 1
+        user_info.current_streak += 1
+    else:
+        user_info.current_streak = 0
+    
+    if user_info.current_streak > user_info.longest_streak:
+        user_info.longest_streak = user_info.current_streak
+
+    is_goal_active.value = False
+
+    is_goal_active.save()
+    user_info.save()
+
+    return HttpResponseRedirect(reverse('profile_home'))
 
 def update_height(request):
     height = request.POST['height']
@@ -74,6 +104,3 @@ def show_achievements(request):
         'achievements': achievements
     }
     return render(request, 'user_achievements.html', data)
-
-def goal_completed(request):
-    pass
