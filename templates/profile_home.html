@@ -1,136 +1,162 @@
 {% extends "html_base_page.html" %}
 
 {% block content %}
-<div class="my-user-intro">
-    <h1>{{ user.first_name }} {{ user.last_name }}</h1><hr>
-    <h3 style = "color: rgb(137, 137, 139);">{{ user_info.reward }}</h3>
-</div>
 
-<div id="corner-option"><a href="achievements">My Achievements</a></div>
+{% if user.is_authenticated %}
 
-<div class="goals-block">
-    <h2>Goals:</h2>
-    {% for goal in user_goals %}
-        {% if goal.is_active %}
-            <div class='each-goal-block'>
-                {{ goal.description }}
-                <a href="{% url 'goal_completed' goal.id %}">
-                    <div style="float: right;">
-                        <i class="fa fa-check"></i>
-                    </div>
-                </a>
-            </div>
-        {% endif %}
-    {% endfor %}
-    <div class="add-goal">
-        <form action="add_goal" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
-            </div>
-            <label for="last_date">Due Date:</label>
-            <input type="date" id="last_date" name="target_date" required>
-            <input class="btn btn-primary" value="Add" type="submit">
-        </form>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href ="achievements">My achievements</a>
+        <a href="../logout">Logout</a>
     </div>
-</div>
+    <div style="float: left;">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Options</span>
+    </div>
 
-<div class="info-block">
-    <h2>User Info</h2>
+    <div class="my-user-intro">
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <h3 style = "color: rgb(137, 137, 139);">{{ user_info.reward }}</h3>
+    </div>
 
-    <!-- make collapse for each attribute having option to update that particular item -->
-
-    <div id="accordian">
-        <div class="card">
-
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapse_height">
-                    <b>Height</b><br>
-                    {% if user_info.height != null %}
-                        {{ user_info.height }} cm
-                    {% endif %}
-                </a>
-            </div>
-            <div id="collapse_height" class="collapse" data-parent="#accordian">
-                <div class="card-body">
-                    <form action="update_height" method="POST">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type='text' class="form-control" name='height' placeholder="Height(cm)" required>
+    <div class="goals-block">
+        <h2>Goals:</h2>
+        {% for goal in user_goals %}
+            {% if goal.is_active %}
+                <div class='each-goal-block'>
+                    {{ goal.description }}
+                    <a href="{% url 'goal_completed' goal.id %}">
+                        <div style="float: right;">
+                            <i class="fa fa-check"></i>
                         </div>
-                        <input class="btn btn-primary" value="Update" type="submit">
-                    </form>
+                    </a>
                 </div>
-            </div>
-
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapse_weight">
-                    <b>Weight</b><br>
-                    {% if user_info.weight != null %}
-                        {{ user_info.weight }} kg
-                    {% endif %}
-                </a>
-            </div>
-            <div id="collapse_weight" class="collapse" data-parent="#accordian">
-                <div class="card-body">
-                    <form action="update_weight" method="POST">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type='text' class="form-control" name='weight' placeholder="Weight(kg)" required>
-                        </div>
-                        <input class="btn btn-primary" value="Update" type="submit">
-                    </form>
+            {% endif %}
+        {% endfor %}
+        <div class="add-goal">
+            <form action="add_goal" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type='text' class="form-control" name='goal' placeholder="Create a goal" required>
                 </div>
-            </div>
-
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapse_gender">
-                    <b>Gender</b><br>
-                    {% if user_info.gender != null %}
-                        {{ user_info.gender }}
-                    {% endif %}
-                </a>
-            </div>
-            <div id="collapse_gender" class="collapse" data-parent="#accordian">
-                <div class="card-body">
-                    <form action="update_gender" method="POST">
-                        {% csrf_token %}
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="male" value="Male" name="gender"/>
-                            <label class="custom-control-label" for="male">Male</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="female" value="Female" name="gender"/>
-                            <label class="custom-control-label" for="female">Female</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="other" value="Other" name="gender"/>
-                            <label class="custom-control-label" for="other">Other</label>
-                        </div>
-                        <input class="btn btn-primary" value="Update" type="submit">
-                    </form>
-                </div>
-            </div>
-
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapse_birthday">
-                    <b>Birthday</b><br>
-                    {{ user_info.DOB }}
-                </a>
-            </div>
-            <div id="collapse_birthday" class="collapse" data-parent="#accordian">
-                <div class="card-body">
-                    <form action="update_birthday" method="POST">
-                        {% csrf_token %}
-                        <label for="birthday">Birthday:</label>
-                        <input type="date" id="birthday" name="bday" required>
-                        <input class="btn btn-primary" value="Update" type="submit">
-                    </form>
-                </div>
-            </div>
-
+                <label for="last_date">Due Date:</label>
+                <input type="date" id="last_date" name="target_date" required>
+                <input class="btn btn-primary" value="Add" type="submit">
+            </form>
         </div>
     </div>
 
-</div>
+    <div class="info-block">
+        <h2>User Info</h2>
+
+        <!-- make collapse for each attribute having option to update that particular item -->
+
+        <div id="accordian">
+            <div class="card">
+
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapse_height">
+                        <b>Height</b><br>
+                        {% if user_info.height != null %}
+                            {{ user_info.height }} cm
+                        {% endif %}
+                    </a>
+                </div>
+                <div id="collapse_height" class="collapse" data-parent="#accordian">
+                    <div class="card-body">
+                        <form action="update_height" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type='text' class="form-control" name='height' placeholder="Height(cm)" required>
+                            </div>
+                            <input class="btn btn-primary" value="Update" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapse_weight">
+                        <b>Weight</b><br>
+                        {% if user_info.weight != null %}
+                            {{ user_info.weight }} kg
+                        {% endif %}
+                    </a>
+                </div>
+                <div id="collapse_weight" class="collapse" data-parent="#accordian">
+                    <div class="card-body">
+                        <form action="update_weight" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type='text' class="form-control" name='weight' placeholder="Weight(kg)" required>
+                            </div>
+                            <input class="btn btn-primary" value="Update" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapse_gender">
+                        <b>Gender</b><br>
+                        {% if user_info.gender != null %}
+                            {{ user_info.gender }}
+                        {% endif %}
+                    </a>
+                </div>
+                <div id="collapse_gender" class="collapse" data-parent="#accordian">
+                    <div class="card-body">
+                        <form action="update_gender" method="POST">
+                            {% csrf_token %}
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="male" value="Male" name="gender"/>
+                                <label class="custom-control-label" for="male">Male</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="female" value="Female" name="gender"/>
+                                <label class="custom-control-label" for="female">Female</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="other" value="Other" name="gender"/>
+                                <label class="custom-control-label" for="other">Other</label>
+                            </div>
+                            <input class="btn btn-primary" value="Update" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapse_birthday">
+                        <b>Birthday</b><br>
+                        {{ user_info.DOB }}
+                    </a>
+                </div>
+                <div id="collapse_birthday" class="collapse" data-parent="#accordian">
+                    <div class="card-body">
+                        <form action="update_birthday" method="POST">
+                            {% csrf_token %}
+                            <label for="birthday">Birthday:</label>
+                            <input type="date" id="birthday" name="bday" required>
+                            <input class="btn btn-primary" value="Update" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    Login to view this page. Don't have an account? <a href="../register">Sign Up</a>
+
+{% endif %}
+
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
 {% endblock %}
+
