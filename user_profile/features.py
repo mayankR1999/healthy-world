@@ -38,3 +38,23 @@ def is_on_time(last_date):
         return True
     else:
         return False
+
+
+def pre_calculate(user_info):
+    if user_info.weight and user_info.height:
+        user_info.BMI = round(user_info.weight/((user_info.height/100)**2), 2)
+    else:
+        user_info.BMI = None
+
+    user_info.health_condition = None
+
+    BMI = user_info.BMI
+    if BMI:
+        if BMI < 18.5:
+            user_info.health_condition = 'Underweight'
+        elif BMI < 25:
+            user_info.health_condition = 'Normal'
+        elif BMI < 30:
+            user_info.health_condition = 'Overweight'
+        else:
+            user_info.health_condition = 'Obese'

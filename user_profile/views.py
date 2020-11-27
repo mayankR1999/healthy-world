@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Goals, UserData, IsGoalActive
 import datetime
-from .features import check_achievements, is_on_time
+from .features import check_achievements, is_on_time, pre_calculate
 
 # Create your views here.
 
@@ -16,6 +16,8 @@ def profile_home(request):
     for goal in user_goals:
         is_active = IsGoalActive.objects.get(pk = goal)
         goal.is_active = is_active.value
+
+    pre_calculate(user_info)
 
     data = {
         'user_goals' : user_goals,

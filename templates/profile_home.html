@@ -139,6 +139,19 @@
                     </div>
                 </div>
 
+                {% if user_info.BMI %}
+                <div class="card-header">
+                    <b>BMI</b><br>
+                    {{ user_info.BMI }}
+                </div>
+
+                <div class="card-header">
+                    <b>Health Condition</b><br>
+                    {{ user_info.health_condition }}
+                </div>
+
+                {% endif %}
+
             </div>
         </div>
     </div>
