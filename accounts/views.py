@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from user_profile.models import UserData
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 
@@ -16,7 +19,8 @@ def login(request):
         auth.login(request, user)
         return redirect('../profile')
     else:
-        pass # pass message
+        messages.info(request, "Username or password didn't match") # pass message
+        return HttpResponseRedirect(reverse(home_page))
 
 def register(request):
     if request.method == 'POST':
