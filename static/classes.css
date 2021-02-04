@@ -1,15 +1,15 @@
 .my-form-container{
-    margin: 150px auto;
-    width: 400px;
+    margin: 120px auto;
+    width: 500px;
     align-content: center;
     border-style: groove;
     border-radius: 15px;
     padding: 40px 50px;
-    background-color: cyan;
+    background-color: rgba(153, 191, 235, .5);
 }
 
 .my-login-form-container{
-    margin: 75px auto;
+    margin: 65px auto;
     width: 400px;
     align-content: center;
     padding: 40px 50px;
@@ -42,8 +42,10 @@
 }
 
 .my-user-intro{
-    margin: 20px;
-    text-align: center;
+    padding: 10px 20px 0px 0px;
+    text-align: right;
+    background-color: beige;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .add-goal{

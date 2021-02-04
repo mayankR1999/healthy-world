@@ -9,6 +9,7 @@ from .features import check_achievements, is_on_time, pre_calculate
 
 def profile_home(request):
     user = request.user
+    # Handle Anonymous user
     user_goals = Goals.objects.filter(user = user)
     user_info = UserData.objects.get(pk = user)
 

@@ -11,20 +11,21 @@ def check_achievements(request):
     if n_tasks >= 1:
         achievements.add('Completed first task')
         if n_tasks >= 5:
-            achievements.add('Completed five tasks')
+            achievements.add('Completed 5 tasks')
             if n_tasks >= 10:
-                achievements.add('Completed ten tasks')
+                achievements.add('Completed 10 tasks')
                 if n_tasks >= 50:
-                    achievements.add('Completed fifty tasks')
+                    achievements.add('Completed 50 tasks')
     
     if streak >= 3:
-        achievements.add('Completed three tasks in a row')
+        achievements.add('Completed 3 tasks in a row')
         if streak >= 5:
-            achievements.add('Completed five tasks in a row')
+            achievements.add('Completed 5 tasks in a row')
             if streak >= 10:
-                achievements.add('Completed ten tasks in a row')
+                achievements.add('Completed 10 tasks in a row')
                 if n_tasks >= 30:
-                    achievements.add('Completed thirty tasks in a row')
+                    achievements.add('Completed 30 tasks in a row')
+                    achievements.add('Streak Legend')
     
     return achievements
 

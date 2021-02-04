@@ -1,15 +1,16 @@
 #achievement-design{
-    border-style: ridge;
+    border-style: outset;
     border-radius: 20px;
     width: fit-content;
     height: fit-content;
-    background-color: white;
+    background-color: mediumspringgreen;
     float: left;
     margin: 10px;
-    padding: 1px 4px;
+    padding: 2px 10px;
+    font-family: cursive;
+    font-size: larger;
 }
 
 #achievement-id{
-    background-color: beige;
     margin: 75px;
 }

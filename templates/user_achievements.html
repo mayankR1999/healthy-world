@@ -2,12 +2,29 @@
 
 {% block content %}
 
+<style>
+    body {
+        background-image: url('/static/pictures/fitness.jpg');
+        background-size: 720px 480px;
+      }
+</style>
+
 {% if user.is_authenticated %}
+<div class="my-user-intro">
+    <a href = "{% url 'profile_home' %}" style="float: left;"><h4>Back to home</h4></a>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+</div>
+
 <div class="container">
     <div id="achievement-id">
-        {% for achievement in achievements %}
-            <div id="achievement-design">{{ achievement }}</div>
-        {% endfor %}
+        {% if achievements %}
+            {% for achievement in achievements %}
+                <div id="achievement-design">{{ achievement }}</div>
+            {% endfor %}
+
+        {% else %}
+            <h2>No achievement unlocked till now. Work hard, complete goals ;)</h2>
+        {% endif %}
     </div>
 </div>
 

@@ -2,8 +2,12 @@
 
 1. test : test@healthyworld
 
-2. mayank_boss : Mayank%99
+2. mayank_r1 : Mayank%99
 
 3. sachin_10 : godofcricket
 
 4. rahul_baba : komedy_king
+
+# superuser
+
+1. mayank : ""
