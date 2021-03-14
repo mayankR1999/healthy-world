@@ -107,3 +107,9 @@ def show_achievements(request):
         'achievements': achievements
     }
     return render(request, 'user_achievements.html', data)
+
+def my_diet(request):
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'my_diet.html')

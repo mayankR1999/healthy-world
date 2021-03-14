@@ -1,0 +1,17 @@
+{% extends "html_base_page.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="my-user-intro">
+        <a href = "{% url 'profile_home' %}" style="float: left;"><h4>Back to home</h4></a>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <!-- <h3 style = "color: rgb(137, 137, 139);">{{ user_info.reward }}</h3> -->
+    </div>
+
+    Diet page.
+
+{% endif %}
+
+{% endblock %}

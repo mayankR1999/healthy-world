@@ -29,3 +29,5 @@ class IsGoalActive(models.Model):
 # class Achievements(models.Model): 
 
 # class Settings(models.Model):
+
+# class Diet(models.Model):

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from .models import UserData
 import datetime
+import requests
 
 def check_achievements(request):
     user = request.user
@@ -59,3 +60,18 @@ def pre_calculate(user_info):
             user_info.health_condition = 'Overweight'
         else:
             user_info.health_condition = 'Obese'
+
+
+def dietAPI(food):
+    url = "https://calorieninjas.p.rapidapi.com/v1/nutrition"
+
+    querystring = {"query":"wheat"}
+
+    headers = {
+        'x-rapidapi-key': "9f0af9423cmsh58e1da4ca98d157p1ab761jsn284ecac77bbe",
+        'x-rapidapi-host': "calorieninjas.p.rapidapi.com"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(response.text)
