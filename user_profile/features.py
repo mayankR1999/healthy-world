@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from .models import UserData
-import datetime
-import requests
+import datetime, requests, json
 
 def check_achievements(request):
     user = request.user
@@ -62,10 +61,10 @@ def pre_calculate(user_info):
             user_info.health_condition = 'Obese'
 
 
-def dietAPI(food):
+def dietAPI(food_name):
     url = "https://calorieninjas.p.rapidapi.com/v1/nutrition"
 
-    querystring = {"query":"wheat"}
+    querystring = {"query":food_name}
 
     headers = {
         'x-rapidapi-key': "9f0af9423cmsh58e1da4ca98d157p1ab761jsn284ecac77bbe",
@@ -74,4 +73,18 @@ def dietAPI(food):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
 
-    print(response.text)
+    return response.text
+
+
+def merge_diet(prev_diet, added_diet, quantity):
+    nutrients = added_diet["items"][0]
+
+    for fact, val in nutrients.items():
+        if fact == "serving_size_g" or fact == "name":
+            continue
+        else:
+            if not prev_diet.get(fact):
+                prev_diet[fact] = 0.0
+            prev_diet[fact] += (int(val)*quantity/100)
+
+    return prev_diet

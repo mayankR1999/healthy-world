@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Goals, UserData, IsGoalActive
-import datetime
+from .models import Goals, UserData, IsGoalActive, Diet
 from .features import check_achievements, is_on_time, pre_calculate
+from .features import merge_diet, dietAPI
+import datetime, json
 
 # Create your views here.
 
@@ -108,8 +109,24 @@ def show_achievements(request):
     }
     return render(request, 'user_achievements.html', data)
 
-def my_diet(request):
+def user_diet(request):
     if request.method == 'POST':
-        pass
+        food_name = request.POST['food_name']
+        quantity = int(request.POST['quantity'])
+        
+        added_nutrients = json.loads(dietAPI(food_name))
+        
+        if not Diet.objects.filter(user = request.user).exists():
+            user_diet_object = Diet()
+        else:
+            user_diet_object = Diet.objects.filter(user = request.user)
+        
+        previous_diet = json.loads(user_diet_object.nutrients)
+        new_diet = merge_diet(previous_diet, added_nutrients, quantity)
+
+        user_diet_object.nutrients = json.dumps(new_diet)
+        user_diet_object.save()
+
+        return HttpResponseRedirect(reverse('user_diet'))
     else:
         return render(request, 'my_diet.html')

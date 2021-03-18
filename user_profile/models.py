@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from jsonfield import JSONField
 import datetime
 
 # Create your models here.
@@ -26,8 +27,12 @@ class IsGoalActive(models.Model):
     goal = models.OneToOneField(Goals, primary_key = True, on_delete = models.CASCADE)
     value = models.BooleanField(default = True)
 
+class Diet(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    nutrients = JSONField(default = '{}')
+
 # class Achievements(models.Model): 
 
 # class Settings(models.Model):
 
-# class Diet(models.Model):
+

@@ -10,7 +10,12 @@
         <!-- <h3 style = "color: rgb(137, 137, 139);">{{ user_info.reward }}</h3> -->
     </div>
 
-    Diet page.
+    <form action="my_diet" method="POST">
+        {% csrf_token %}
+        <input type="text" name="food_name" placeholder="Add Food" required>
+        <input type="number" name="quantity" placeholder="Quantity(in grams)" required>
+        <input type="submit" value="Go">
+    </form>
 
 {% endif %}
 

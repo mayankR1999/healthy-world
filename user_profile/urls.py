@@ -9,6 +9,6 @@ urlpatterns = [
     path('update_gender', views.update_gender, name = 'update_gender'),
     path('update_birthday', views.update_birthday, name = 'update_birthday'),
     path('achievements', views.show_achievements, name = 'achievements'),
-    path('my_diet', views.my_diet, name = "my_diet"),
+    path('my_diet', views.user_diet, name = "user_diet"),
     path('goal_completed/<int:id>', views.goal_completed, name = 'goal_completed'),
 ]
