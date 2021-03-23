@@ -1,8 +1,6 @@
 # Healthy-World
 A Web Application for Health and Fitness tracking of the user.
 
-Youtube link : https://youtu.be/qJA4iw4EfM4
-
 Features:
 
  - user personalised accounts.

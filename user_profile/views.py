@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from .models import Goals, UserData, IsGoalActive, Diet
 from .features import check_achievements, is_on_time, pre_calculate
@@ -127,6 +127,6 @@ def user_diet(request):
         user_diet_object.nutrients = json.dumps(new_diet)
         user_diet_object.save()
 
-        return HttpResponseRedirect(reverse('user_diet'))
+        return JsonResponse(user_diet_object.nutrients)
     else:
         return render(request, 'my_diet.html')
